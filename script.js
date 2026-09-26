@@ -427,8 +427,7 @@ const QUESTIONS = [
     id: 29,
     section: "A",
     category: "komputer",
-    question:
-      "Dalam komputer, topologi yang berbentuk lingkaran disebut...",
+    question: "Dalam komputer, topologi yang berbentuk lingkaran disebut...",
     options: ["A. Star", "B. Bus", "C. Ring", "D. Mesh"],
     answer: "C",
     answerKey: "C. Ring",
@@ -691,9 +690,11 @@ function applyFilters() {
 
   const filtered = QUESTIONS.filter((q) => {
     // Section Filter
-    if (activeSection === "KUNCI") {
-      // Show all when viewing key mode
-    } else if (activeSection !== "ALL" && q.section !== activeSection) {
+    if (
+      activeSection !== "ALL" &&
+      activeSection !== "KUNCI" &&
+      q.section !== activeSection
+    ) {
       return false;
     }
     // Topic Filter
@@ -709,22 +710,6 @@ function applyFilters() {
     }
     return true;
   });
-  AllAnswers() {
-    showAllAnswers = !showAllAnswers;
-    const btn = document.getElementById("toggleAllBtn");
-    btn.innerHTML = showAllAnswers ? "🙈 Sembunyikan Kunci" : "👁️ Buka Kunci";
-
-    QUESTIONS.forEach((q) => {
-      const ansElem = document.getElementById(`explanation-${q.id}`);
-      if (ansElem) {
-        if (showAllAnswers) {
-          ansElem.classList.remove("hidden");
-        } else {
-          ansElem.classList.add("hidden");
-        }
-      }
-    });
-  }
   renderQuestions(filtered);
 }
 function toggleAllAnswers() {
@@ -754,23 +739,23 @@ function checkUserAnswer(id) {
   if (!q) return;
 
   const feedbackElem = document.getElementById(`feedback-${id}`);
-    const selectedOption = document.querySelector(
-      `input[name="q-${id}"]:checked`,
-    );
-    if (!selectedOption) {
-      feedbackElem.innerHTML = `<span class="text-amber-600 font-medium">Pilih salah satu opsi jawaban terlebih dahulu.</span>`;
-      return;
-    }
-    if (selectedOption.value === q.answer) {
-      feedbackElem.innerHTML = `<span class="text-emerald-600 font-bold flex items-center gap-1">✓ Jawaban Benar! (${q.answerKey})</span>`;
-    } else {
-      feedbackElem.innerHTML = `<span class="text-rose-600 font-bold flex items-center gap-1">✗ Jawaban Kurang Tepat. Kunci: ${q.answerKey}</span>`;
-    }
+  const selectedOption = document.querySelector(
+    `input[name="q-${id}"]:checked`,
+  );
+  if (!selectedOption) {
+    feedbackElem.innerHTML = `<span>Pilih salah satu opsi jawaban terlebih dahulu.</span>`;
+    return;
   }
-
+  if (selectedOption.value === q.answer) {
+    feedbackElem.innerHTML = `<span>✓ Jawaban Benar! (${q.answerKey})</span>`;
+  } else {
+    feedbackElem.innerHTML = `<span>✗ Jawaban Kurang Tepat. Kunci: ${q.answerKey}</span>`;
+  }
   // Reveal explanation after check
   const ansElem = document.getElementById(`explanation-${id}`);
-  if (ansElem) ansElem.classList.remove("hidden");
+  if (ansElem) {
+    ansElem.classList.remove("hidden");
+  }
 }
 
 function renderQuestions(items = QUESTIONS) {
@@ -786,7 +771,7 @@ function renderQuestions(items = QUESTIONS) {
   let html = "";
   items.forEach((q) => {
     const isKunciMode = activeSection === "KUNCI";
-    
+
     html += `
           <div>
               <!-- Top Metadata -->
@@ -842,7 +827,8 @@ function renderQuestions(items = QUESTIONS) {
                   <div id="feedback-${q.id}"></div>
                   <div>
                       ${
-                        !isKunciMode ? `
+                        !isKunciMode
+                          ? `
                       <button onclick="checkUserAnswer(${q.id})">
                           Cek Jawaban
                       </button>
