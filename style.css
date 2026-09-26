@@ -7,6 +7,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
 }
 body {
   width: 100vw;
@@ -44,6 +45,9 @@ nav {
   box-shadow: 0 0 10px black;
   margin-bottom: 1rem;
   position: sticky;
+  top: 0;
+  overflow: hidden;
+  background: white;
 }
 .navSection {
   display: flex;
@@ -99,6 +103,32 @@ nav {
   background: var(--back2);
   font-weight: 600;
   transition: all 0.3s;
+}
+
+main {
+  justify-content: center;
+  align-items: center;
+}
+#questionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  height: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 3px black;
+  margin: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+#emptyState {
+  text-align: center;
+  width: 100vw;
+  height: 27rem;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem;
 }
 
 footer {
