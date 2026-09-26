@@ -773,86 +773,134 @@ function renderQuestions(items = QUESTIONS) {
     const isKunciMode = activeSection === "KUNCI";
 
     html += `
-          <div>
-              <!-- Top Metadata -->
-              <div>
-                  <div>
-                      <span>
-                          Soal #${q.id}
-                      </span>
-                      <span>
-                          ${q.category}
-                      </span>
-                      <span>
-                          Bagian ${q.section}
-                      </span>
-                  </div>
-              </div>
-              <!-- Question Body -->
-              <div>
-                  ${q.question}
-              </div>
-              <!-- Optional Code Snippet -->
-              ${
-                q.code
-                  ? `
-              <div>
-                  <pre><code>${escapeHtml(q.code)}</code></pre>
-              </div>
-              `
-                  : ""
-              }
-              <!-- pg -->
-              ${
-                !isKunciMode
-                  ? `
-              <div>
-                  ${q.options
-                    .map((opt, idx) => {
-                      const optVal = String.fromCharCode(97 + idx); // a, b, c, d, e
-                      return `
-                      <label>
-                          <input type="radio" name="q-${q.id}" value="${optVal}">
-                          <span>${opt}</span>
-                      </label>
-                      `;
-                    })
-                    .join("")}
-              </div>
-              `
-                  : ""
-              }
-              <!-- Action Buttons -->
-              <div>
-                  <div id="feedback-${q.id}"></div>
-                  <div>
-                      ${
-                        !isKunciMode
-                          ? `
-                      <button onclick="checkUserAnswer(${q.id})">
-                          Cek Jawaban
-                      </button>
-                      `
-                          : ""
-                      }
-                      <button onclick="toggleSingleAnswer(${q.id})">
-                          💡 Kunci & Pembahasan
-                      </button>
-                  </div>
-              </div>
+          <article class="question-card">
 
-              <!-- Explanation Box -->
-              <div id="explanation-${q.id}">
-                  <div>
-                      Kunci Jawaban: <span>${q.answerKey}</span>
-                  </div>
-                  <div>
-                      <strong>Langkah Pembahasan:</strong>
-                      ${q.explanation}
-                  </div>
-              </div>
+        <!-- HEADER CARD -->
+        <div class="question-header">
+          <div class="question-meta">
+            <span class="question-number">
+              Soal #${q.id}
+            </span>
 
+            <span class="question-category">
+              ${q.category}
+            </span>
+
+            <span class="question-section">
+              Bagian ${q.section}
+            </span>
           </div>
+        </div>
+
+        <!-- QUESTION -->
+        <div class="question-body">
+          <h3 class="question-text">
+            ${q.question}
+          </h3>
+        </div>
+
+        <!-- CODE -->
+        ${
+          q.code
+            ? `
+              <div class="question-code">
+                <pre><code>${escapeHtml(q.code)}</code></pre>
+              </div>
+            `
+            : ""
+        }
+
+        <!-- OPTIONS -->
+        ${
+          !isKunciMode
+            ? `
+              <div class="question-options">
+
+                ${q.options
+                  .map((opt, idx) => {
+                    const optVal = String.fromCharCode(97 + idx);
+
+                    return `
+                      <label class="option-item">
+                        <input
+                          type="radio"
+                          name="q-${q.id}"
+                          value="${optVal}"
+                        >
+
+                        <span class="option-content">
+                          ${opt}
+                        </span>
+                      </label>
+                    `;
+                  })
+                  .join("")}
+
+              </div>
+            `
+            : ""
+        }
+
+        <!-- FEEDBACK -->
+        <div
+          id="feedback-${q.id}"
+          class="question-feedback"
+        ></div>
+
+        <!-- ACTION -->
+        <div class="question-actions">
+
+          ${
+            !isKunciMode
+              ? `
+                <button
+                  type="button"
+                  class="btn-check"
+                  onclick="checkUserAnswer(${q.id})"
+                >
+                  ✓ Cek Jawaban
+                </button>
+              `
+              : ""
+          }
+
+          <button
+            type="button"
+            class="btn-explanation"
+            onclick="toggleSingleAnswer(${q.id})"
+          >
+            💡 Kunci & Pembahasan
+          </button>
+
+        </div>
+
+        <!-- EXPLANATION -->
+        <div
+          id="explanation-${q.id}"
+          class="question-explanation hidden"
+        >
+
+          <div class="answer-key">
+            <span class="answer-label">
+              Kunci Jawaban
+            </span>
+
+            <span class="answer-value">
+              ${q.answerKey}
+            </span>
+          </div>
+
+          <div class="explanation-content">
+            <strong>Langkah Pembahasan</strong>
+
+            <p>
+              ${q.explanation}
+            </p>
+          </div>
+
+        </div>
+
+      </article>
           `;
   });
 
