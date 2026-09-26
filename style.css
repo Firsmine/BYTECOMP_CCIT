@@ -1,0 +1,114 @@
+:root {
+  --back: rgb(51, 51, 173);
+  --back2: rgb(143, 194, 252);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+header {
+  background-color: var(--back);
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  height: 7rem;
+  display: flex;
+  padding: 1rem;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 2rem;
+}
+.title h2 {
+  font-weight: 800;
+}
+.soal {
+  display: flex;
+  gap: 4rem;
+  padding: 5rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 10px black;
+  margin-bottom: 1rem;
+  position: sticky;
+}
+.navSection {
+  display: flex;
+  gap: 1rem;
+}
+.navBtn {
+  width: 6rem;
+  height: 1.8rem;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 600;
+  box-shadow: 0 0 3px black;
+}
+.navBtn:hover {
+  background: var(--back);
+  color: white;
+  transition: all 0.3s;
+  box-shadow: 0 0 5px black;
+}
+.navSearch {
+  display: flex;
+  gap: 1rem;
+}
+#searchInput {
+  width: 19rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: none;
+  padding: 1rem;
+  box-shadow: 0 0 3px black;
+}
+#searchInput:focus {
+  border: var(--back);
+  transition: all 0.3s;
+}
+#topicSelect {
+  width: 8rem;
+  height: 1.8rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 3px black;
+  border: none;
+  padding: 1px;
+}
+#toggleAllBtn {
+  width: 6rem;
+  height: 1.8rem;
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 0 3px black;
+}
+#topicSelect:hover,
+#toggleAllBtn:hover {
+  background: var(--back2);
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+footer {
+  background-color: var(--back);
+  padding: 0.5rem;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 2rem;
+  box-shadow: 0 0 7px black;
+}
