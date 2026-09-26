@@ -130,6 +130,9 @@ main {
   justify-content: center;
   padding: 10rem;
 }
+.hidden {
+  display: none;
+}
 
 footer {
   background-color: var(--back);
