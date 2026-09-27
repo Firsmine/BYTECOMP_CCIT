@@ -1,4 +1,4 @@
-const QUESTIONS = [...QUESTION_A];
+const QUESTIONS = [...QUESTION_A, ...QUESTIONS_B];
 
 let activeSection = "ALL";
 let showAllAnswer = false;
@@ -6,6 +6,12 @@ let userAnswers = {};
 
 function initApp() {
   renderQuestions();
+}
+function setSection(sec) {
+  activeSection = sec;
+  document.querySelectorAll(".navBtn");
+  const activeBtn = document.getElementById(`tab${sec}`);
+  applyFilters();
 }
 function applyFilters() {
   const searchTerm = document.getElementById("searchInput").value.toLowerCase();
