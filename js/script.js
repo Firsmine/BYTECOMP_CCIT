@@ -1,4 +1,4 @@
-const QUESTIONS = [...QUESTION_A, ...QUESTIONS_B];
+const QUESTIONS = [...QUESTION_A, ...QUESTIONS_B, ...QUESTIONS_C];
 
 let activeSection = "ALL";
 let showAllAnswer = false;
@@ -103,18 +103,15 @@ function renderQuestions(items = QUESTIONS) {
 
     html += `
           <article class="question-card">
-
         <!-- HEADER CARD -->
         <div class="question-header">
           <div class="question-meta">
             <span class="question-number">
               Soal #${q.id}
             </span>
-
             <span class="question-category">
               ${q.category}
             </span>
-
             <span class="question-section">
               Bagian ${q.section}
             </span>
@@ -144,11 +141,9 @@ function renderQuestions(items = QUESTIONS) {
           !isKunciMode
             ? `
               <div class="question-options">
-
                 ${q.options
                   .map((opt, idx) => {
                     const optVal = String.fromCharCode(97 + idx);
-
                     return `
                       <label class="option-item">
                         <input
@@ -156,7 +151,6 @@ function renderQuestions(items = QUESTIONS) {
                           name="q-${q.id}"
                           value="${optVal}"
                         >
-
                         <span class="option-content">
                           ${opt}
                         </span>
@@ -164,12 +158,10 @@ function renderQuestions(items = QUESTIONS) {
                     `;
                   })
                   .join("")}
-
               </div>
             `
             : ""
         }
-
         <!-- FEEDBACK -->
         <div
           id="feedback-${q.id}"
@@ -178,7 +170,6 @@ function renderQuestions(items = QUESTIONS) {
 
         <!-- ACTION -->
         <div class="question-actions">
-
           ${
             !isKunciMode
               ? `
@@ -192,7 +183,6 @@ function renderQuestions(items = QUESTIONS) {
               `
               : ""
           }
-
           <button
             type="button"
             class="btn-explanation"
@@ -200,7 +190,6 @@ function renderQuestions(items = QUESTIONS) {
           >
             💡 Kunci & Pembahasan
           </button>
-
         </div>
 
         <!-- EXPLANATION -->
@@ -208,27 +197,21 @@ function renderQuestions(items = QUESTIONS) {
           id="explanation-${q.id}"
           class="question-explanation hidden"
         >
-
           <div class="answer-key">
             <span class="answer-label">
               Kunci Jawaban
             </span>
-
             <span class="answer-value">
               ${q.answerKey}
             </span>
           </div>
-
           <div class="explanation-content">
             <strong>Langkah Pembahasan</strong>
-
             <p>
               ${q.explanation}
             </p>
           </div>
-
         </div>
-
       </article>
           `;
   });
